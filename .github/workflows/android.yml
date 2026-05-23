@@ -38,3 +38,4 @@ jobs:
         with:
           name: SoR_OS_Launcher
           path: build/apk/*.apk
+
