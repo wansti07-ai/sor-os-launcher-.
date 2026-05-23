@@ -11,9 +11,10 @@ requirements = python3,flet
 orientation = portrait
 fullscreen = 1
 
-android.api = 33
+android.api = 34
 android.minapi = 21
-android.ndk = 25b
+android.build_tools = 34.0.0
+android.ndk = 26b
 android.ndk_api = 21
 
 android.permissions = INTERNET
