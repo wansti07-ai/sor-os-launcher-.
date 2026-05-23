@@ -1,3 +1,4 @@
+
 name: Build SoR OS Launcher APK
 on: [push, pull_request, workflow_dispatch]
 
@@ -22,12 +23,12 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libffi-dev libssl-dev autoconf automake libtool build-essential ccache python3-pip unzip zip
+          sudo apt-get install -y libffi-dev libssl-dev autoconf automake libtool build-essential ccache python3-pip unzip zip openjdk-17-jdk
 
-      - name: Install Cutting-Edge Buildozer and Cython
+      - name: Install Tools
         run: |
           pip install --upgrade pip setuptools wheel
-          pip install cython flet
+          pip install cython kivy flet
           pip install git+https://github.com/kivy/buildozer.git@master
 
       - name: Generate Production APK via Buildozer
