@@ -24,10 +24,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libffi-dev libssl-dev autoconf automake libtool build-essential ccache python3-pip unzip zip
 
-      - name: Install Buildozer and Cython
+      - name: Install Cutting-Edge Buildozer and Cython
         run: |
           pip install --upgrade pip setuptools wheel
-          pip install buildozer cython flet
+          pip install cython flet
+          pip install git+https://github.com/kivy/buildozer.git@master
 
       - name: Generate Production APK via Buildozer
         run: |
