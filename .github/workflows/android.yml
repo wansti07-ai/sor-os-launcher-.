@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
@@ -14,26 +14,31 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Python 3.10
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: Install System Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libffi-dev libssl-dev autoconf automake libtool build-essential ccache python3-pip unzip zip openjdk-17-jdk
 
-      - name: Install Stable Tools
+      - name: Auto-Accept Android Licenses
+        run: |
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+          yes | sdkmanager --licenses || true
+
+      - name: Install Tools
         run: |
           pip install --upgrade pip setuptools wheel
-          pip install cython==0.29.36
-          pip install flet
+          pip install cython flet
           pip install git+https://github.com/kivy/buildozer.git@master
 
       - name: Generate Production APK via Buildozer
         run: |
-          buildozer android debug
+          yes | buildozer android debug
 
       - name: Upload Finished APK Artifact
         uses: actions/upload-artifact@v4
