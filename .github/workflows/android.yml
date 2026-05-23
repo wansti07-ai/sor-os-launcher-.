@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -14,19 +16,20 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Python 3.10
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+          cache: 'pip'
 
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libffi-dev libssl-dev autoconf automake libtool build-essential ccache python3-pip
+          sudo apt-get install -y libffi-dev libssl-dev autoconf automake libtool build-essential ccache python3-pip unzip zip
 
       - name: Install Buildozer and Cython
         run: |
-          pip install --upgrade pip
+          pip install --upgrade pip setuptools wheel
           pip install buildozer cython flet
 
       - name: Generate Production APK via Buildozer
@@ -40,3 +43,4 @@ jobs:
         with:
           name: SoR_OS_Launcher
           path: bin/*.apk
+          compression-level: 9
