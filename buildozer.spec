@@ -20,7 +20,7 @@ android.ndk_api = 21
 
 android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 android.manifest.intent_filters = [{"name": "android.intent.action.MAIN", "actions": ["android.intent.action.MAIN"], "categories": ["android.intent.category.HOME", "android.intent.category.DEFAULT"]}]
-android.release = 0
+android.release = 16
 
 [buildozer]
 log_level = 2
